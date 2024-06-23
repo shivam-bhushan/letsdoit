@@ -4,6 +4,8 @@ import TaskCard from "../components/TaskCard";
 import axios from "axios";
 import AddTaskForm from "../components/AddTaskForm";
 
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+
 function Todo() {
   const [tasks, setTasks] = useState([]);
 
@@ -20,7 +22,7 @@ function Todo() {
     }
 
     axios
-      .get("http://localhost:3000/api/tasks/getTask", {
+      .get(`https://letsdoit-4ttj.onrender.com/api/tasks/getTask`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -49,7 +51,7 @@ function Todo() {
 
     axios
       .post(
-        "http://localhost:3000/api/tasks/addTask",
+        `https://letsdoit-4ttj.onrender.com/api/tasks/addTask`,
         { title },
         {
           headers: {
@@ -80,11 +82,14 @@ function Todo() {
     }
 
     axios
-      .delete(`http://localhost:3000/api/tasks/deleteTask/${taskId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .delete(
+        `https://letsdoit-4ttj.onrender.com/api/tasks/deleteTask/${taskId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         console.log("Task deleted successfully");
         fetchTasks(localStorage.getItem("userId"));

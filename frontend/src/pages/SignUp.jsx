@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+
 function SignUp() {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +27,7 @@ function SignUp() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        `https://letsdoit-4ttj.onrender.com/api/auth/register`,
         formData,
         {
           headers: {

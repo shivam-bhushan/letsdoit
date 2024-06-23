@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios"; // Import Axios
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
@@ -25,7 +27,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `https://letsdoit-4ttj.onrender.com/api/auth/login`,
         formData,
         {
           headers: {
