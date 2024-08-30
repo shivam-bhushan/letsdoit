@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import axios from "axios"; // Import Axios
@@ -37,7 +38,7 @@ function Login() {
       );
       console.log("Login successful:", response.data);
       localStorage.setItem("token", response.data.token);
-      navigate("/todo");
+      navigate("/todolist");
     } catch (error) {
       alert(error.response ? error.response.data : error.message);
     }

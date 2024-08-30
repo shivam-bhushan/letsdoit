@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +39,7 @@ function SignUp() {
       console.log(response);
 
       localStorage.setItem("token", response.data.token);
-      navigate("/todo");
+      navigate("/todolist");
     } catch (error) {
       alert(error.response.data.message);
       console.error("Error registering user:", error.response.data.message);

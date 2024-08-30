@@ -1,20 +1,25 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import TaskCard from "../components/TaskCard";
 import axios from "axios";
 import AddTaskForm from "../components/AddTaskForm";
+import { useLocation } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+const API_BASE_URL = "http://localhost:3000";
 
 function Todo() {
   const [tasks, setTasks] = useState([]);
+  const { state } = useLocation();
+  const { listId } = state;
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
-    fetchTasks(userId);
-  }, []);
+    fetchTasks(listId, userId);
+  }, [listId]);
 
-  const fetchTasks = async (userId) => {
+  const fetchTasks = async (listId, userId) => {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Authentication error. Please log in.");
@@ -22,7 +27,7 @@ function Todo() {
     }
 
     axios
-      .get(`https://letsdoit-4ttj.onrender.com/api/tasks/getTask`, {
+      .get(`${API_BASE_URL}/api/lists/getListTasks/${listId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -51,8 +56,8 @@ function Todo() {
 
     axios
       .post(
-        `https://letsdoit-4ttj.onrender.com/api/tasks/addTask`,
-        { title },
+        `${API_BASE_URL}/api/tasks/addTask`,
+        { title, listId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,7 +65,7 @@ function Todo() {
         }
       )
       .then(() => {
-        fetchTasks(localStorage.getItem("userId"));
+        fetchTasks(listId, localStorage.getItem("userId"));
       })
       .catch((error) => {
         console.error("Error adding task:", error);
@@ -82,17 +87,14 @@ function Todo() {
     }
 
     axios
-      .delete(
-        `https://letsdoit-4ttj.onrender.com/api/tasks/deleteTask/${taskId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .delete(`${API_BASE_URL}/api/tasks/deleteTask/${taskId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
         console.log("Task deleted successfully");
-        fetchTasks(localStorage.getItem("userId"));
+        fetchTasks(listId, localStorage.getItem("userId"));
       })
       .catch((error) => {
         console.error("Error deleting task:", error);

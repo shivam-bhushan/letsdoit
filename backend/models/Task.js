@@ -9,6 +9,11 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    listId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'List',
+        require: true
+    },
     userId: {
         type: String,
         required: true,
@@ -17,6 +22,11 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    dueDate: {
+        type: Date,
+        default: null,
+        required: false
+    }
 })
 
 const Task = mongoose.model("Task", taskSchema);

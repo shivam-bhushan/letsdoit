@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Todo from "./pages/Todo"; // Assuming this is your Todo component
 import Login from "./pages/Login";
 import "./App.css";
+import TaskLists from "./pages/TaskLists";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/signup" />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/todolist" element={<TaskLists />} />
         <Route path="/todo" element={<Todo />} />
       </Routes>
     </Router>

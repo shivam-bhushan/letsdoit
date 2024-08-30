@@ -15,6 +15,7 @@ app.use(express.json({ extended: false }));
 
 app.use('/api/auth', (await import('./routes/auth.js')).default);
 app.use('/api/tasks', (await import('./routes/tasks.js')).default);
+app.use('/api/lists', (await import('./routes/lists.js')).default);
 
 const PORT = process.env.PORT || 3000;
 

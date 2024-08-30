@@ -19,7 +19,7 @@ function TaskCard({ title, id, removeTask }) {
 
 TaskCard.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   removeTask: PropTypes.func.isRequired,
 };
 
